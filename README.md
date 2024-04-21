@@ -20,9 +20,9 @@
 
 <p> Run code </p>
 
-```python function_call_graph.py```
+```python other_fcg.py```
 
-<p> Code sẽ chạy và tạo ra 1 đồ thị các hàm và liên kết giữa các hàm</p>
+<p> Code sẽ chạy và tạo ra 1 file csv chứa các thông tin về các hàm và tọa độ của các hàm trên đồ thị</p>
 <p> Nếu không có thư viện nào sử dụng pip install để add thêm thư viện</p>
 
 ## Code Doc2vec
@@ -30,11 +30,14 @@
 <p> Thực hiện tải thư viện gensim</p>
 
 ```pip install gensim```
+<p> Thực hiện training và tạo model doc2vec</p>
 
+```python train_doc2vec.py```
+<p> Code sẽ tạo ra 1 file model để train doc2vec </p>
 <p> Thực hiện chỉnh sử đường dẫn là folder chứa các file java</p>
 
 <p> Run code </p>
 
 ```python doc2vec.py```
 
-<p> Chương trình sẽ tạo ra kết quả là hệ thống model của mỗi nhãn document, tương ứng với 1 hàm</p>
+<p>Chương trình sẽ tạo ra 1 file csv chứa các hàm đã được dán nhãn và từ đây sẽ đưa vào cnn để thực hiện nhúng vào 1 vector chung</p>
