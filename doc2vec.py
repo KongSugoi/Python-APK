@@ -1,30 +1,32 @@
-from gensim.models.doc2vec import Doc2Vec, TaggedDocument
-import os
+from gensim.models.doc2vec import Doc2Vec
+import csv
 
-# Hàm để đọc các hàm từ file và gán nhãn cho chúng
-def read_java_files(folder_path):
-    documents = []
-    for root, dirs, files in os.walk(folder_path):
-        for file in files:
-            if file.endswith(".java"):
-                file_path = os.path.join(root, file)
-                with open(file_path, 'r') as f:
-                    content = f.read()
-                    documents.append(TaggedDocument(content.split(), [file_path]))  # Gán nhãn cho mỗi tài liệu
-    return documents
+# Load mô hình doc2vec đã được huấn luyện trước
+doc2vec_model = Doc2Vec.load("doc2vec_model")
 
-# Đường dẫn tới thư mục chứa các file mã nguồn Java
-folder_path = "D:\BTL_PYTHON\Output_file"
+# Đọc dữ liệu từ file CSV đã lưu các tọa độ của các hàm
+coordinates = []
+with open("fcg_coordinates.csv", 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader)  # Bỏ qua dòng tiêu đề
+    for row in reader:
+        coordinates.append(row)
 
-# Đọc các hàm từ các file và gán nhãn cho chúng
-documents = read_java_files(folder_path)
+# Nhúng dữ liệu thành các vector sử dụng doc2vec
+vectors = []
+for row in coordinates:
+    function = row[0]
+    x = float(row[1])
+    y = float(row[2])
+    vector = doc2vec_model.infer_vector([function, str(x), str(y)])
+    vectors.append(vector)
 
-# Xây dựng mô hình Doc2Vec
-model = Doc2Vec(documents, vector_size=100, window=5, min_count=1, workers=4)
+# Lưu các vector vào một file CSV mới
+output_file = "vectors.csv"
+with open(output_file, 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Function"] + [f"Feature_{i}" for i in range(len(vectors[0]))])  # Tiêu đề
+    for function, vector in zip(coordinates, vectors):
+        writer.writerow([function[0]] + list(vector))
 
-# Lưu mô hình vào tệp model.txt
-model.save("model.txt")
-
-# Lấy vector của một tài liệu cụ thể (ví dụ: tài liệu thứ 0)
-vector = model.infer_vector(documents[1].words)
-print("Vector of document 1:", vector)
+print("Các vector đã được lưu vào file:", output_file)
