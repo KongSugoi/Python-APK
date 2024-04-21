@@ -41,3 +41,15 @@
 ```python doc2vec.py```
 
 <p>Chương trình sẽ tạo ra 1 file csv chứa các hàm đã được dán nhãn và từ đây sẽ đưa vào cnn để thực hiện nhúng vào 1 vector chung</p>
+
+ ## Code CNN
+ <p> Cài đặt các thư viện liên quan như scikit-learn, tensorflow</p>
+ <p> Run code training để tạo dữ liệu train CNN</p>
+ 
+ ```python train_cnn.py```
+
+ <p> Run code cnn để thực hiện nhúng vector, đổi Function hay Label thành cột dán nhãn trong file csv</p>
+
+ ```python cnn.py```
+
+<p> Chương trình sẽ tạo ra 1 file csv chứa thông tin vector sau khi được tạo ra</p>
