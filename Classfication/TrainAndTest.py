@@ -3,11 +3,10 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from RandomForest import RandomForest
 import pandas as pd
-
 # Get data
 
 # Get data from file csv
-data_file = pd.read_csv("path_to_file")
+data_file = pd.read_csv("C:/Users/Admin/Downloads/Python-APK-master/Classfication/convert_done.csv")
 
 # Split features(X) và labels (y) 
 X = data_file.iloc[:, :-1].values # lấy tất cả hàng : và lấy các cột từ đầu đến cuối nhưng không lấy cái cuối :-1
@@ -24,11 +23,5 @@ clf = RandomForest(n_trees=20)
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 
-acc = accuracy(y_test, predictions)
-print("RandomForest classfication accuracy: ", acc)
-
-# classfication
-input_value = list(map(int, input().split))
-x = np.array(input_value)
-result = clf.predict(x)
-print(result)
+acc =  accuracy(y_test, predictions)
+print(acc)
