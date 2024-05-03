@@ -26,5 +26,8 @@ embedded_vectors = model.predict(X.reshape(X.shape[0], X.shape[1], 1))
 # Tạo DataFrame từ kết quả nhúng
 embedded_df = pd.DataFrame(embedded_vectors, columns=[f"Vector_{i}" for i in range(embedded_vectors.shape[1])])
 
+# Thêm cột "Function" vào DataFrame
+embedded_df["Function"] = data["Function"]
+
 # Lưu kết quả nhúng vào file CSV
-embedded_df.to_csv("embedded_vectors.csv", index=False)
+embedded_df.to_csv("D:\BTL_PYthon\CNN\embedded_vectors_17.csv", index=False)
