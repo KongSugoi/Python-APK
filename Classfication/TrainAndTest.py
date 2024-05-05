@@ -30,5 +30,5 @@ file = input("Path to file vector: ")
 data_file = pd.read_csv(file)
 X = data_file.iloc[1,1:].values
 prediction = clf.predict(X)
-if prediction==1: print("This is malware")
+if prediction != 0: print("This is malware")
 else: print("This is not malware")
