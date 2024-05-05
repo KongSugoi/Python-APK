@@ -28,7 +28,7 @@ print("Accuaracy: ",acc)
 
 file = input("Path to file vector: ")
 data_file = pd.read_csv(file)
-X = data_file.iloc[1,1:].values
-prediction = clf.predict(X)
+X_pre = data_file.iloc[1,1:].values
+prediction = clf.predict(X_pre)
 if prediction != 0: print("This is malware")
 else: print("This is not malware")
