@@ -24,4 +24,11 @@ clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 
 acc =  accuracy(y_test, predictions)
-print(acc)
+print("Accuaracy: ",acc)
+
+file = input("Path to file vector: ")
+data_file = pd.read_csv(file)
+X = data_file.iloc[1,1:].values
+prediction = clf.predict(X)
+if prediction==1: print("This is malware")
+else: print("This is not malware")
